@@ -1,18 +1,32 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+
+// Components
 import Navigation from './components/Navigation';
-import HolaMundo from './components/HolaMundo';
-import AuthContextProvider from './contexts/AuthContext'
+import Footer from './components/Footer';
+
+// Contexts
+import AuthContextProvider from './contexts/AuthContext';
+
+// Misc
+import { BrowserRouter as Router, Switch } from "react-router-dom";
+import { Container } from 'reactstrap';
+import Routes from './Routes';
 
 function App() {
   return (
-    <AuthContextProvider>
-
-      <Navigation nombre="Eduardo" edad={22}></Navigation>
-      <div className="container">
-        <h1>Hello World!</h1>
-        <HolaMundo></HolaMundo>
-     </div>
-    </AuthContextProvider>
+    <Fragment>
+      <Router>
+        <AuthContextProvider>
+            <Navigation />
+            <Container className="mt-4">
+              <Switch>
+                { Routes }
+              </Switch>
+            </Container>
+            <Footer />
+        </AuthContextProvider>
+      </Router>
+    </Fragment>
   );
 }
 
