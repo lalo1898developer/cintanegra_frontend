@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import {
   Button,  
   Form,  
@@ -13,7 +14,7 @@ const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleForm = (e) => {
+  const handleForm = async (e) => {
     e.preventDefault();            
     const jsonSend = {
       firstName,
@@ -21,7 +22,18 @@ const Signup = () => {
       email,
       password
     };
-    console.log(jsonSend);
+    const POST_URI = `${process.env.REACT_APP_BACKEND_BASE_URL}/signup`
+    try {
+      await axios.post(POST_URI, jsonSend);
+      setFirstName('');
+      setLastName('');
+      setEmail('');
+      setPassword('');
+      alert('Successfull signup!');
+    } catch (error) {
+      alert('Error on signup!');
+    }
+
   }
 
   return (
